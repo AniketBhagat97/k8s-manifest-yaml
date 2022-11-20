@@ -1,0 +1,11 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-autoscaler
+spec:
+  scaleTargetRef:
+    kind: ReplicaSet
+    name: myrs
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 6

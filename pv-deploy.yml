@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deploy-pv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      myname: pv
+  template:
+    metadata:
+      name: podpv
+      labels:
+        myname: pv
+    spec:
+      containers:
+      - name: co5
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: my-pv
+          mountPath: "/tmp/persistent"
+      volumes:
+      - name: my-pv
+        persistentVolumeClaim:
+          claimName: my-ebs-pvc
